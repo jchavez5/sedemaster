@@ -1,0 +1,28 @@
+	ADMINISTRADOR
+archivo
+	-cerrar seccion
+	-salir
+ventas
+	-crear venta habitacion
+Movimiento
+	-manejo de caja
+consultas
+	-ver ventas 
+	-ver empleados
+administrador
+	-crear empleado
+
+
+	EMPLEADO
+archivo
+	-cerrar seccion
+	-salir
+ventas
+	-crear venta habitacion
+Movimiento
+	-manejo de caja
+consultas
+	-ver ventas 
+	-ver empleados
+
+

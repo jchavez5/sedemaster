@@ -1,0 +1,34 @@
+--- inserta en roles
+INSERT INTO roles ("nombre","descripcion","visible")
+VALUES ('','',TRUE)
+
+--- pruebas triggers
+CREATE TRIGGER eliminar_B_roles BEFORE DELETE 
+    ON roles  FOR  EACH ROW 
+    EXECUTE PROCEDURE eliminar_B_roles();
+
+CREATE OR REPLACE FUNCTION eliminar_B_roles() RETURNS TRIGGER AS $eliminar_B_roles$
+  DECLARE
+  BEGIN
+   
+   --
+   -- Esta funcion es usada para proteger datos en un tabla 
+   -- No se permitira el borrado de filas si la usamos
+   -- en un disparador de tipo BEFORE / row-level
+   --
+
+   RETURN NULL;
+  END;
+$eliminar_B_roles$ LANGUAGE plpgsql;
+
+---- procedimiento almacenado buscar usuariario y contraseña
+CREATE OR REPLACE FUNCTION 
+buscar_usuario(usu varchar,contra varchar) 
+RETURNS  usuarios AS $$
+DECLARE
+n1 usuarios;
+BEGIN
+SELECT * into n1 from usuarios where "contraseña" = contra and usu = usuario;
+return n1;
+end;
+$$ LANGUAGE plpgsql;
