@@ -28,7 +28,7 @@ public class Ventana_Administrador extends javax.swing.JFrame {
     public Ventana_Administrador() {
         initComponents();
         this.setLocationRelativeTo(null);
-        cAdm.IniciarLogin(bienvenido,Fecha,RolUsuario,CrearAdm);
+        //cAdm.IniciarLogin(bienvenido,Fecha,RolUsuario,CrearAdm);
         RolUsuario.setVisible(false);
 //        tabla_empleado n = new tabla_empleado();
 //        MostarAdm.add(n);

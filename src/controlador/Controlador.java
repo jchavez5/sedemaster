@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelo.alquilacion_habitacion;
 import modelo.registro_empleado;
 import objetos.PasswordGenerator;
 import vista.login;
@@ -70,7 +71,7 @@ public class Controlador {
     }
 
     public void efectoColocarColor(JPanel panelPrincipal) {
-        panelPrincipal.setBackground(new Color(150, 40, 27));
+        panelPrincipal.setBackground(new Color(255,82,82));
     }
 
     public void mostrar(JDesktopPane mostrar, JInternalFrame x) {
@@ -92,13 +93,13 @@ public class Controlador {
     public void efectoQuitarColorbotton(JButton panelPrincipal) {
         panelPrincipal.setBackground(new Color(244, 67, 54));
     }
-//////////////// movimiento del mouse
+//////////////// movimiento del mouse menu lateral
 
     public void setColorMovimiento(JPanel pane, JPanel Sdpane, JLabel label) {
 
         label.setForeground(new Color(255, 82, 82));
-        pane.setBackground(new Color(189, 189, 189));
-        Sdpane.setBackground(new Color(189, 189, 189));
+        pane.setBackground(new Color(207,216,220));
+        Sdpane.setBackground(new Color(207,216,220));
 
     }
 
@@ -299,5 +300,17 @@ ImageIcon icon = new ImageIcon("src/imagenes/Guardar.png");
         tabla.setModel(modelo);     
     }
     
-   
+    public void cargartablaDisponible(JTable tabla){
+        alquilacion_habitacion alqH = new alquilacion_habitacion();
+        alqH.realizaConexion();
+        ArrayList<String> lista = alqH.diponible();
+          DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+        for (int i = 0; i < lista.size(); i++) {
+            String[] datos = lista.get(i).split(",");
+            Object[] fila ={datos[0],datos[1],datos[2]};
+            modelo.addRow(fila);
+        }
+        tabla.setModel(modelo);     
+    }
+    
 }

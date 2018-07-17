@@ -5,17 +5,26 @@
  */
 package vista;
 
+import controlador.Controlador;
+import java.awt.Color;
+import java.awt.Font;
+
 /**
  *
  * @author Josechavez
  */
 public class AlquilarHabitacion extends javax.swing.JInternalFrame {
-
+Controlador control = new Controlador();
     /**
      * Creates new form AlquilarHabitacion
      */
     public AlquilarHabitacion() {
         initComponents();
+        control.cargartablaDisponible(disponible);
+       disponible.getTableHeader().setFont(new Font("Cambria", 1, 16)); 
+        disponible.getTableHeader().setBackground(new Color(69,90,100));
+//        disponible.getTableHeader().setForeground(Color.white);
+//        disponible.setRowHeight(disponible.getRowHeight());
     }
 
     /**
@@ -28,93 +37,96 @@ public class AlquilarHabitacion extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        disponible = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        PUtilizar = new javax.swing.JPanel();
+        lblUtilizar = new javax.swing.JLabel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setBackground(new java.awt.Color(207, 216, 220));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
-        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        jTabbedPane1.setToolTipText("");
-        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTabbedPane1.setDebugGraphicsOptions(javax.swing.DebugGraphics.LOG_OPTION);
-        jTabbedPane1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        jLabel9.setBackground(new java.awt.Color(255, 82, 82));
+        jLabel9.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(33, 33, 33));
+        jLabel9.setText("Disponibles.");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        disponible.setBackground(new java.awt.Color(255, 255, 255));
+        disponible.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        disponible.setForeground(new java.awt.Color(0, 0, 0));
+        disponible.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "N-HAB", "TIPO", "PRECIO"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(597, Short.MAX_VALUE))
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        disponible.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        disponible.setAutoscrolls(false);
+        disponible.setGridColor(new java.awt.Color(0, 0, 0));
+        disponible.setSelectionBackground(new java.awt.Color(255, 51, 51));
+        disponible.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        disponible.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        disponible.setSurrendersFocusOnKeystroke(true);
+        disponible.getTableHeader().setReorderingAllowed(false);
+        disponible.setUpdateSelectionOnSort(false);
+        disponible.setVerifyInputWhenFocusTarget(false);
+        jScrollPane1.setViewportView(disponible);
+        if (disponible.getColumnModel().getColumnCount() > 0) {
+            disponible.getColumnModel().getColumn(0).setResizable(false);
+            disponible.getColumnModel().getColumn(1).setResizable(false);
+            disponible.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jLabel10.setBackground(new java.awt.Color(255, 82, 82));
+        jLabel10.setFont(new java.awt.Font("Cambria", 1, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(33, 33, 33));
+        jLabel10.setText("En uso");
+
+        PUtilizar.setBackground(new java.awt.Color(69, 90, 100));
+        PUtilizar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        PUtilizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblUtilizar.setBackground(new java.awt.Color(69, 90, 100));
+        lblUtilizar.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        lblUtilizar.setForeground(new java.awt.Color(255, 255, 255));
+        lblUtilizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUtilizar.setText("  Utilizar");
+        lblUtilizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUtilizarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblUtilizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblUtilizarMouseExited(evt);
+            }
+        });
+        PUtilizar.add(lblUtilizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 40));
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 336, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                .addContainerGap())
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-
-        jTabbedPane1.addTab("Control de habitaciones", jPanel2);
-
-        jLabel2.setText("precios");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(293, 293, 293)
-                .addComponent(jLabel2)
-                .addContainerGap(683, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jLabel2)
-                .addContainerGap(355, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Lista de precios", jPanel3);
-
-        jPanel4.setPreferredSize(new java.awt.Dimension(1000, 400));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1012, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Configuracion de servicios", jPanel4);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -122,15 +134,32 @@ public class AlquilarHabitacion extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(3, 3, 3)
+                        .addComponent(PUtilizar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 492, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addGap(358, 358, 358))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PUtilizar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jDesktopPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,15 +182,29 @@ public class AlquilarHabitacion extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lblUtilizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUtilizarMouseClicked
+ 
+    }//GEN-LAST:event_lblUtilizarMouseClicked
+
+    private void lblUtilizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUtilizarMouseEntered
+         control.efectoColocarColor(PUtilizar);
+    }//GEN-LAST:event_lblUtilizarMouseEntered
+
+    private void lblUtilizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUtilizarMouseExited
+
+        control.resetColorMovimiento(PUtilizar,PUtilizar,lblUtilizar);
+
+    }//GEN-LAST:event_lblUtilizarMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel PUtilizar;
+    private javax.swing.JTable disponible;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblUtilizar;
     // End of variables declaration//GEN-END:variables
 }
