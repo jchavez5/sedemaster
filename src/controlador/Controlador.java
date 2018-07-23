@@ -312,5 +312,11 @@ ImageIcon icon = new ImageIcon("src/imagenes/Guardar.png");
         }
         tabla.setModel(modelo);     
     }
-    
+    public void datos(JTable table,JTextField[] text){
+        if (table.getSelectedRowCount()>0) {
+             for (int i = 0; i < text.length; i++) {
+            text[i].setText(table.getValueAt(table.getSelectedRow(), i).toString());
+        }
+        }
+    }
 }
